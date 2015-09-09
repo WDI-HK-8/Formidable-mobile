@@ -1,0 +1,15 @@
+<ion-view view-title="{{ form.name }}" hide-nav-bar="false">
+  <ion-content>
+    <form>
+      <div class="list">
+        <label class="item item-input" ng-repeat="content in contents">
+          <span class="input-label">{{ content.label }}</span>
+          <input type="text">
+        </label>
+        <div class="padding">
+          <button class="button button-block button-positive" type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

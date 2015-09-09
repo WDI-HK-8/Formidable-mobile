@@ -54,6 +54,23 @@ angular.module('starter.controllers', [])
     }).error(function(resp){
       console.log(resp)
     });
+})
+
+.controller('ShowFormCtrl', function($scope, $stateParams, $http) {
+
+  var user_id = $scope.currentUser.id;
+
+  var url = 'http://localhost:3000' || 'https://formidableforms.herokuapp.com';
+
+  $http.get(url + "/forms/" + $stateParams.id).success(function(resp){
+    console.log("Form infos",resp);
+    $scope.form = resp;
+    $scope.contents = resp.contents;
+  }).error(function(resp){
+    console.log(resp)
+  });
+
+
 });
 
 

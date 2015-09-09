@@ -39,11 +39,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-token-auth'])
     url: '/forms',
     views: {
       'menuContent': {
-        templateUrl: 'templates/forms.html',
+        templateUrl: 'templates/forms/index.html',
         controller: 'FormsCtrl'
       }
     }
-  });
+  })
+
+  .state('app.singleForm', {
+    url: '/forms/:id',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/forms/show.html',
+        controller: 'ShowFormCtrl'
+      }
+    }
+  })
 
   $urlRouterProvider.otherwise('/app/login');
 
