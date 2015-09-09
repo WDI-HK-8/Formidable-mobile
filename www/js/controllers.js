@@ -1,10 +1,15 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $auth, $window) {
-
+  var validateUser = function(){
+    $scope.currentUser = JSON.parse($window.localStorage.getItem('current-user'));
+    console.log("current user:", $scope.currentUser)
+  };
+  validateUser();
 })
 
 .controller('LogInCtrl', function($scope, $auth, $window, $ionicPopup, $state) {
+
   var validateUser = function(){
     $scope.currentUser = JSON.parse($window.localStorage.getItem('current-user'));
     console.log("current user:", $scope.currentUser)
@@ -38,8 +43,13 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('FormsCtrl', function($scope, $auth, $window) {
-
-})
+.controller('FormsCtrl', function($scope, $auth, $window, $http) {
+  $http.get("http://localhost:3000/forms").success(
+    function(resp){
+      console.log(resp);
+    }).error(function(resp){
+      console.log(resp)
+    });
+});
 
 
