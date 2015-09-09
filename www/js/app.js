@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ng-token-auth'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -15,7 +15,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $authProvider) {
   $stateProvider
 
     .state('app', {
@@ -36,4 +36,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   });
 
   $urlRouterProvider.otherwise('/app/login');
+
+  $authProvider.configure({
+    apiUrl: 'https://formidableforms.herokuapp.com'
+  });
 });

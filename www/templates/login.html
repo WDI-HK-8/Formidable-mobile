@@ -1,19 +1,20 @@
 <ion-view view-title="Log In" hide-nav-bar="true">
   <ion-content>
-    <form>
+    <form ng-submit="doLogin()">
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Email</span>
-          <input type="email">
+          <input type="email" ng-model="loginData.email">
         </label>
         <label class="item item-input">
           <span class="input-label">Password</span>
-          <input type="password">
+          <input type="password" ng-model="loginData.password">
         </label>
         <div class="padding">
           <button class="button button-block button-positive" type="submit">Log in</button>
         </div>
       </div>
     </form>
+    <button class="button button-block button-balanced" ng-click="logout()">Log out</button>
   </ion-content>
 </ion-view>
