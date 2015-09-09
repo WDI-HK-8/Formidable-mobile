@@ -44,9 +44,15 @@ angular.module('starter.controllers', [])
 })
 
 .controller('FormsCtrl', function($scope, $auth, $window, $http) {
-  $http.get("http://localhost:3000/forms").success(
+  
+  var user_id = $scope.currentUser.id;
+
+  var url = 'http://localhost:3000' || 'https://formidableforms.herokuapp.com';
+
+  $http.get(url + "/users/" + user_id + "/forms").success(
     function(resp){
       console.log(resp);
+      $scope.forms = resp;
     }).error(function(resp){
       console.log(resp)
     });
