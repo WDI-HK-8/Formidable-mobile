@@ -4,14 +4,14 @@
       <img id="logo-login" src="img/logo.png">
     </div>
     <form ng-submit="doLogin()">
-      <div class="list">
-        <label class="item item-input">
+      <div class="list list-login">
+        <label class="item item-input item-floating-label">
           <span class="input-label">Email</span>
-          <input type="email" ng-model="loginData.email">
+          <input type="email" ng-model="loginData.email" placeholder="Email">
         </label>
-        <label class="item item-input">
+        <label class="item item-input item-floating-label">
           <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
+          <input type="password" ng-model="loginData.password" placeholder="Password">
         </label>
         <div class="padding">
           <button class="button button-block button-positive" type="submit">Log in</button>
