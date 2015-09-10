@@ -3,6 +3,38 @@ ion-content {
   background-color: #F8F8F8;
 }
 
+.dark-menu, .bar.bar-stable.dark-menu, .bar.bar-stable.dark-menu .title  {
+  background-color: #33485F;
+}
+
+.bar.bar-stable.dark-menu .title  {
+  background-color: #33485F;
+  font-size: 14px;
+}
+
+.dark-menu .list .item-complex .item-content {
+  background-color: #33485F;
+  color: white;
+  font-family: 'Lato';
+  font-weight: bold;
+}
+
+.dark-menu .item {
+  border: none;
+}
+
+.dark-menu.bar.bar-header {
+  z-index: 11;
+}
+
+ion-side-menu-content {
+  background-color: #33485F;
+}
+
+.dark-menu .item-icon-left .icon-card {
+  color: white;
+}
+
 .bar {
   height: 50px;
 }
@@ -89,3 +121,7 @@ font-family: 'Lato', Helvetica, Arial, sans-serif;
 .subtitle-list {
   font-size: 10px;
 }
+
+
+
+
