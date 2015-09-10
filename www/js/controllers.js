@@ -85,7 +85,6 @@ angular.module('starter.controllers', [])
         answers[content.id] = answerValues;
         
       });
-
       console.log("answers", answers)
 
       var hash = {answers: answers}
