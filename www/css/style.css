@@ -12,7 +12,6 @@ ion-content {
   font-size: 14px;
 }
 
-<<<<<<< HEAD
 .bar.bar-stable.dark-menu .company  {
   background-color: #33485F;
   font-size: 10px;
@@ -24,12 +23,6 @@ ion-content {
   background-color: #33485F;
   color: white;
   font-family: 'Lato', 'Arial', sans-serif;
-=======
-.dark-menu .list .item-complex .item-content {
-  background-color: #33485F;
-  color: white;
-  font-family: 'Lato';
->>>>>>> (design): Change menu colors/fonts/borders + show email in menu
   font-weight: bold;
 }
 
