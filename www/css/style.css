@@ -1,4 +1,34 @@
 /* Empty. Add your own CSS if you like */
+ion-content {
+  background-color: #F8F8F8;
+}
+
+.bar {
+  height: 50px;
+}
+
+.bar.bar-stable {
+  background-color: #00BD9C;
+  color: white;
+}
+
+.bar.bar-stable .title {
+  background-color: #00BD9C;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.bar.bar-stable .button-icon, .bar .button.back-button  {
+  color: white;
+  font-family: 'Lato';
+  font-weight: bold;
+}
+
+h1, h2, h3, h4, h5 {
+font-family: 'Lato', Helvetica, Arial, sans-serif;
+}
+
 .login-main {
   background-color: #33485F;
   color: white;
@@ -18,6 +48,14 @@
 }
 
 .button.button-positive {
+  border: none;
+  font-family: 'Lato';
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+.button.button-balanced {
   background-color: #00BD9C;
   border: none;
   font-family: 'Lato';
@@ -42,4 +80,12 @@
 
 .login-input.item-input input, .login-input.item-input textarea {
   color: white;
+}
+
+.icon-card {
+  color: #00BD9C;
+}
+
+.subtitle-list {
+  font-size: 10px;
 }
