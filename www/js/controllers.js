@@ -76,21 +76,19 @@ angular.module('starter.controllers', [])
       console.log("submission create",resp);
       console.log($scope.submits)
       
-      var answer = {};
+      var answers = {};
       
       submissionId = resp.id;
       $scope.contents.forEach(function(content) {
         answerValues = [$scope.submits[content.index]];
-        answer = {
-          submission_id: submissionId,
-          values: answerValues
-        }
-        console.log("answer", answer)
+        answers[content.id] = answerValues;
         
-        $http.post(apiUrl + '/contents/' + content.id + '/answers', answer).success(function(response) {
-          console.log("response", response);
-        });
       });
+        console.log("answers", answers)
+        var hash = {answers: answers}
+        $http.post(apiUrl + '/submissions/' + submissionId + '/answers', hash).success(function(response) {
+          console.log("response", response);
+        })
 
       $ionicPopup.alert({
         title: 'Success',
