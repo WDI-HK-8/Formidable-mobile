@@ -105,6 +105,33 @@ angular.module('starter.controllers', [])
     });
   };
 
+})
+
+.controller('SubmissionsCtrl', function($scope, $stateParams, $http, apiUrl) {
+  var user_id = $scope.currentUser.id;
+
+  $http.get(apiUrl + "/users/" + user_id + "/forms").success(
+    function(resp){
+      console.log("list forms",resp);
+      var forms = resp;
+      
+      forms.forEach(function(form) {
+
+        $http.get(apiUrl + "/forms/" + form.id + "/submissions").success(
+          function(resp){
+            console.log("list submissions for 1 form",resp);
+            $scope.submissions = resp;
+            $scope.submissions.forEach(function(submission) {
+              submission.name = form.name;
+            });
+        }).error(function(resp){
+            console.log(resp)
+        });
+      });
+
+    }).error(function(resp){
+      console.log(resp)
+    });
 });
 
 
