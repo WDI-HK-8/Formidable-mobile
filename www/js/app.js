@@ -50,4 +50,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-token-auth'])
   $authProvider.configure({
     apiUrl: 'http://localhost:3000' || 'https://formidableforms.herokuapp.com'
   });
-});
+})
+
+.constant('apiUrl', 'http://localhost:3000' || 'https://formidableforms.herokuapp.com');
