@@ -78,11 +78,13 @@ angular.module('starter.controllers', [])
       
       var answer = {};
       
-      answer.submission_id = resp.id;
-      
+      submissionId = resp.id;
       $scope.contents.forEach(function(content) {
-        answer.values = [$scope.submits[content.index]];
-        console.log("answer value",answer.values)
+        answerValues = [$scope.submits[content.index]];
+        answer = {
+          submission_id: submissionId,
+          values: answerValues
+        }
         console.log("answer", answer)
         
         $http.post(apiUrl + '/contents/' + content.id + '/answers', answer).success(function(response) {
