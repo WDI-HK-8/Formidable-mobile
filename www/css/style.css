@@ -1,8 +1,45 @@
 /* Empty. Add your own CSS if you like */
+.login-main {
+  background-color: #33485F;
+  color: white;
+}
+
 .logo-login {
   margin: 40px auto;
 }
 
 #logo-login {
   width: 70%;
+}
+
+.list-login {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.button.button-positive {
+  background-color: #00BD9C;
+  border: none;
+  font-family: 'Lato';
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+.item.item-input {
+  background-color: transparent;
+  border-bottom: 1px solid white;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+
+.item-input input, .item-input textarea {
+  font-family: 'Lato';
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.login-input.item-input input, .login-input.item-input textarea {
+  color: white;
 }
