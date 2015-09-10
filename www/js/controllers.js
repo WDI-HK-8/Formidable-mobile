@@ -1,10 +1,15 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $auth, $window) {
-
+  var validateUser = function(){
+    $scope.currentUser = JSON.parse($window.localStorage.getItem('current-user'));
+    console.log("current user:", $scope.currentUser)
+  };
+  validateUser();
 })
 
-.controller('LogInCtrl', function($scope, $auth, $window, $ionicPopup) {
+.controller('LogInCtrl', function($scope, $auth, $window, $ionicPopup, $state) {
+
   var validateUser = function(){
     $scope.currentUser = JSON.parse($window.localStorage.getItem('current-user'));
     console.log("current user:", $scope.currentUser)
@@ -13,13 +18,14 @@ angular.module('starter.controllers', [])
   $scope.loginData = {};
 
   $scope.doLogin = function() {
-    console.log($scope.loginData);
 
     $auth.submitLogin($scope.loginData).then(function(resp){
       console.log(resp);
 
       $window.localStorage.setItem('current-user', JSON.stringify(resp));
       validateUser();
+
+      $state.go('app.forms')
 
     }).catch(function(resp){
       console.log(resp);
@@ -35,6 +41,19 @@ angular.module('starter.controllers', [])
     validateUser();
   };
 
+})
+
+.controller('FormsCtrl', function($scope, $auth, $window, $http, apiUrl) {
+  
+  var user_id = $scope.currentUser.id;
+
+  $http.get(apiUrl + "/users/" + user_id + "/forms").success(
+    function(resp){
+      console.log(resp);
+      $scope.forms = resp;
+    }).error(function(resp){
+      console.log(resp)
+    });
 });
 
 

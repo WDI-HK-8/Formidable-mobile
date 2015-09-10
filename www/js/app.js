@@ -33,11 +33,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-token-auth'])
         controller: 'LogInCtrl'
       }
     }
+  })
+
+  .state('app.forms', {
+    url: '/forms',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/forms.html',
+        controller: 'FormsCtrl'
+      }
+    }
   });
 
   $urlRouterProvider.otherwise('/app/login');
 
   $authProvider.configure({
-    apiUrl: 'https://formidableforms.herokuapp.com'
+    apiUrl: 'http://localhost:3000' || 'https://formidableforms.herokuapp.com'
   });
-});
+})
+
+.constant('apiUrl', 'http://localhost:3000' || 'https://formidableforms.herokuapp.com');
