@@ -56,7 +56,7 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('ShowFormCtrl', function($scope, $stateParams, $http, apiUrl) {
+.controller('ShowFormCtrl', function($scope, $stateParams, $http, apiUrl, $ionicPopup, $state) {
 
   var user_id = $scope.currentUser.id;
 
@@ -92,8 +92,18 @@ angular.module('starter.controllers', [])
         });
       });
 
+      $ionicPopup.alert({
+        title: 'Success',
+        template: 'Form answers successfully submitted'
+      }).then(function(){
+        $state.go('app.forms');
+      });
     }).error(function(resp){
       console.log(resp)
+      $ionicPopup.alert({
+        title: 'Error',
+        template: 'Error while submitting. Please try again.'
+      });
     });
   };
 
