@@ -15,7 +15,7 @@ ion-content {
 .dark-menu .list .item-complex .item-content {
   background-color: #33485F;
   color: white;
-  font-family: 'Lato';
+  font-family: 'Lato', 'Arial', sans-serif;
   font-weight: bold;
 }
 
@@ -53,7 +53,7 @@ ion-side-menu-content {
 
 .bar.bar-stable .button-icon, .bar .button.back-button  {
   color: white;
-  font-family: 'Lato';
+  font-family: 'Lato', 'Arial', sans-serif;
   font-weight: bold;
 }
 
@@ -81,7 +81,7 @@ font-family: 'Lato', Helvetica, Arial, sans-serif;
 
 .button.button-positive {
   border: none;
-  font-family: 'Lato';
+  font-family: 'Lato', 'Arial', sans-serif;
   font-weight: bold;
   font-size: 18px;
   margin-top: 30px;
@@ -90,7 +90,7 @@ font-family: 'Lato', Helvetica, Arial, sans-serif;
 .button.button-balanced {
   background-color: #00BD9C;
   border: none;
-  font-family: 'Lato';
+  font-family: 'Lato', 'Arial', sans-serif;
   font-weight: bold;
   font-size: 18px;
   margin-top: 30px;
