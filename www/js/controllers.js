@@ -66,10 +66,35 @@ angular.module('starter.controllers', [])
     console.log("Form infos",resp);
     $scope.form = resp;
     $scope.contents = resp.contents;
+
   }).error(function(resp){
     console.log(resp)
   });
 
+  $scope.submits = {};
+
+  $scope.submitAnswers = function() {
+    $http.post(url + "/forms/" + $stateParams.id + "/submissions").success(function(resp){
+      console.log("submission create",resp);
+      console.log($scope.submits)
+      
+      var answer = {};
+      
+      answer.submission_id = resp.id;
+      
+      $scope.contents.forEach(function(content) {
+        answer.values = [$scope.submits[content.index]];
+        console.log("answer value",answer.values)
+        console.log("answer", answer)
+        $http.post(url + '/contents/' + content.id + '/answers', answer).success(function(response) {
+          console.log("response", response);
+        });
+      });
+
+    }).error(function(resp){
+      console.log(resp)
+    });
+  };
 
 });
 

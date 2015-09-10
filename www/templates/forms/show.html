@@ -1,10 +1,10 @@
-<ion-view view-title="{{ form.name }}" hide-nav-bar="false">
+<ion-view view-title="{{ form.name }}">
   <ion-content>
-    <form>
+    <form ng-submit="submitAnswers()">
       <div class="list">
-        <label class="item item-input" ng-repeat="content in contents">
+        <label class="item" ng-repeat="content in contents | orderBy: 'index'">
           <span class="input-label">{{ content.label }}</span>
-          <input type="text">
+          <input ng-if="content.category == 'text'" type="text" ng-model="submits[content.index]">
         </label>
         <div class="padding">
           <button class="button button-block button-positive" type="submit">Submit</button>
