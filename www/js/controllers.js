@@ -56,13 +56,11 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('ShowFormCtrl', function($scope, $stateParams, $http) {
+.controller('ShowFormCtrl', function($scope, $stateParams, $http, apiUrl) {
 
   var user_id = $scope.currentUser.id;
 
-  var url = 'http://localhost:3000' || 'https://formidableforms.herokuapp.com';
-
-  $http.get(url + "/forms/" + $stateParams.id).success(function(resp){
+  $http.get(apiUrl + "/forms/" + $stateParams.id).success(function(resp){
     console.log("Form infos",resp);
     $scope.form = resp;
     $scope.contents = resp.contents;
@@ -74,7 +72,7 @@ angular.module('starter.controllers', [])
   $scope.submits = {};
 
   $scope.submitAnswers = function() {
-    $http.post(url + "/forms/" + $stateParams.id + "/submissions").success(function(resp){
+    $http.post(apiUrl + "/forms/" + $stateParams.id + "/submissions").success(function(resp){
       console.log("submission create",resp);
       console.log($scope.submits)
       
@@ -86,7 +84,8 @@ angular.module('starter.controllers', [])
         answer.values = [$scope.submits[content.index]];
         console.log("answer value",answer.values)
         console.log("answer", answer)
-        $http.post(url + '/contents/' + content.id + '/answers', answer).success(function(response) {
+        
+        $http.post(apiUrl + '/contents/' + content.id + '/answers', answer).success(function(response) {
           console.log("response", response);
         });
       });
