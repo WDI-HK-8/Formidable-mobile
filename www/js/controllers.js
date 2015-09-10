@@ -83,7 +83,6 @@ angular.module('starter.controllers', [])
       $scope.contents.forEach(function(content) {
         answerValues = [$scope.submits[content.index]];
         answers[content.id] = answerValues;
-        
       });
       console.log("answers", answers)
 
