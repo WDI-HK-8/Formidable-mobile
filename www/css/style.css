@@ -12,7 +12,14 @@ ion-content {
   font-size: 14px;
 }
 
-.dark-menu .list .item-complex .item-content {
+.bar.bar-stable.dark-menu .company  {
+  background-color: #33485F;
+  font-size: 10px;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.dark-menu .list .item-complex .item-content, .dark-menu .list .item {
   background-color: #33485F;
   color: white;
   font-family: 'Lato', 'Arial', sans-serif;
