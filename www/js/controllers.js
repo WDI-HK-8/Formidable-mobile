@@ -83,10 +83,10 @@ angular.module('starter.controllers', [])
         content.options.forEach(function(option) {
           var hash = {'name': option}
           options.push(hash);
-          console.log(options);
         });
-        $scope.options = options;
-        console.log($scope.options);
+        content.options = options;
+        options = [];
+        console.log('refined options ',content.options,options);
       }
     });
 
@@ -103,7 +103,7 @@ angular.module('starter.controllers', [])
     // Create a submission
     $http.post(apiUrl + "/forms/" + $stateParams.id + "/submissions", random).success(function(resp){
       console.log("submission create",resp);
-      console.log($scope.submits)
+      // console.log($scope.submits)
       
       // Add each answer for each field into an object called hash
       var answers = {};
@@ -113,8 +113,10 @@ angular.module('starter.controllers', [])
         if($scope.submits[content.index]['name']) {
           $scope.submits[content.index] = $scope.submits[content.index]['name'];
         }
+        console.log($scope.submits)
         answerValues = [$scope.submits[content.index]];
         answers[content.id] = answerValues;
+        console.log(answers)
       });
       console.log("answers", answers)
 

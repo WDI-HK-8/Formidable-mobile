@@ -5,15 +5,15 @@
         <div ng-repeat="content in contents | orderBy: 'index'">
 
         <!-- INPUT TEXTS -->
-          <label ng-if="content.category == 'text'" class="item item-input item-stacked-label">
+          <label ng-if="content.category == 'text'" class="item">
             <span class="input-label">{{ content.label }}</span>
             <input ng-model="submits[content.index]" type="text">
           </label>
           
           <!-- DROPDOWNS -->
-          <label ng-if="content.category == 'dropdown'"class="item item-input item-stacked-label item-select">
+          <label ng-if="content.category == 'dropdown'"class="item item-select">
             <div class="input-label"> {{ content.label }} </div>
-            <select ng-model="submits[content.index]" ng-options="option.name for option in options"></select>
+            <select ng-model="submits[content.index]" ng-options="option.name for option in content.options"></select>
           </label>
 
         </div>
