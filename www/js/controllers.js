@@ -54,6 +54,57 @@ angular.module('starter.controllers', [])
     }).error(function(resp){
       console.log(resp)
     });
+})
+
+.controller('ShowFormCtrl', function($scope, $stateParams, $http, apiUrl, $ionicPopup, $state) {
+
+  var user_id = $scope.currentUser.id;
+
+  $http.get(apiUrl + "/forms/" + $stateParams.id).success(function(resp){
+    console.log("Form infos",resp);
+    $scope.form = resp;
+    $scope.contents = resp.contents;
+
+  }).error(function(resp){
+    console.log(resp)
+  });
+
+  $scope.submits = {};
+
+  $scope.submitAnswers = function() {
+    $http.post(apiUrl + "/forms/" + $stateParams.id + "/submissions").success(function(resp){
+      console.log("submission create",resp);
+      console.log($scope.submits)
+      
+      var answers = {};
+      
+      submissionId = resp.id;
+      $scope.contents.forEach(function(content) {
+        answerValues = [$scope.submits[content.index]];
+        answers[content.id] = answerValues;
+        
+      });
+        console.log("answers", answers)
+        var hash = {answers: answers}
+        $http.post(apiUrl + '/submissions/' + submissionId + '/answers', hash).success(function(response) {
+          console.log("response", response);
+        })
+
+      $ionicPopup.alert({
+        title: 'Success',
+        template: 'Form answers successfully submitted'
+      }).then(function(){
+        $state.go('app.forms');
+      });
+    }).error(function(resp){
+      console.log(resp)
+      $ionicPopup.alert({
+        title: 'Error',
+        template: 'Error while submitting. Please try again.'
+      });
+    });
+  };
+
 });
 
 
