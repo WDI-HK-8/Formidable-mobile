@@ -71,10 +71,24 @@ angular.module('starter.controllers', [])
   var user_id = $scope.currentUser.id;
 
   // Get list of fields for 1 form
+  var options = [];
+
   $http.get(apiUrl + "/forms/" + $stateParams.id).success(function(resp){
     console.log("Form infos",resp);
     $scope.form = resp;
     $scope.contents = resp.contents;
+
+    $scope.contents.forEach(function(content) {
+      if (content.options !== null) {
+        content.options.forEach(function(option) {
+          var hash = {'name': option}
+          options.push(hash);
+          console.log(options);
+        });
+        $scope.options = options;
+        console.log($scope.options);
+      }
+    });
 
   }).error(function(resp){
     console.log(resp)
@@ -96,6 +110,9 @@ angular.module('starter.controllers', [])
       submissionId = resp.id;
 
       $scope.contents.forEach(function(content) {
+        if($scope.submits[content.index]['name']) {
+          $scope.submits[content.index] = $scope.submits[content.index]['name'];
+        }
         answerValues = [$scope.submits[content.index]];
         answers[content.id] = answerValues;
       });

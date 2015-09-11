@@ -3,10 +3,19 @@
     <form>
       <div class="list">
         <div ng-repeat="content in contents | orderBy: 'index'">
-          <label class="item item-input item-stacked-label" ng-if="content.category == 'text'">
+
+        <!-- INPUT TEXTS -->
+          <label ng-if="content.category == 'text'" class="item item-input item-stacked-label">
             <span class="input-label">{{ content.label }}</span>
-            <input type="text" ng-model="submits[content.index]">
+            <input ng-model="submits[content.index]" type="text">
           </label>
+          
+          <!-- DROPDOWNS -->
+          <label ng-if="content.category == 'dropdown'"class="item item-input item-stacked-label item-select">
+            <div class="input-label"> {{ content.label }} </div>
+            <select ng-model="submits[content.index]" ng-options="option.name for option in options"></select>
+          </label>
+
         </div>
         <div class="padding">
           <button class="button button-block button-positive" ng-click="showSignatureModal()">Sign</button>
