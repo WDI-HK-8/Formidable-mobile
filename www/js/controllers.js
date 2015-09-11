@@ -103,7 +103,7 @@ angular.module('starter.controllers', [])
     // Create a submission
     $http.post(apiUrl + "/forms/" + $stateParams.id + "/submissions", random).success(function(resp){
       console.log("submission create",resp);
-      // console.log($scope.submits)
+      console.log($scope.submits)
       
       // Add each answer for each field into an object called hash
       var answers = {};

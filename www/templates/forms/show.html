@@ -1,8 +1,8 @@
 <ion-view view-title="{{ form.name }}">
   <ion-content>
-    <form>
-      <div class="list">
-        <div ng-repeat="content in contents | orderBy: 'index'">
+    <form ng-submit="submitAnswers()">
+      <div class="list card">
+        <div ng-repeat="content in contents | orderBy: 'index'" class="item">
 
         <!-- INPUT TEXTS -->
           <label ng-if="content.category == 'text'" class="item">
@@ -16,6 +16,12 @@
             <select ng-model="submits[content.index]" ng-options="option.name for option in content.options"></select>
           </label>
 
+          <!-- INPUT TEXTAREAS -->
+          <label ng-if="content.category == 'textarea'" class="item">
+            <span class="input-label">{{ content.label }}</span>
+            <textarea ng-model="submits[content.index]" type="text" rows="5"></textarea>
+          </label>
+
         </div>
         <div class="padding">
           <button class="button button-block button-positive" ng-click="showSignatureModal()">Sign</button>
@@ -23,7 +29,7 @@
       </div>
     </form>
     <div class="col" ng-show="signature">
-+      <img ng-src="{{signature}}" style="width:100%;" />
-+   </div>
+      <img ng-src="{{signature}}" style="width:100%;" />
+   </div>
   </ion-content>
 </ion-view>
