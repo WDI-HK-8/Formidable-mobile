@@ -2,10 +2,12 @@
   <ion-content>
     <form>
       <div class="list">
-        <label class="item" ng-repeat="content in contents | orderBy: 'index'">
-          <span class="input-label">{{ content.label }}</span>
-          <input ng-if="content.category == 'text'" type="text" ng-model="submits[content.index]">
-        </label>
+        <div ng-repeat="content in contents | orderBy: 'index'">
+          <label class="item item-input item-stacked-label" ng-if="content.category == 'text'">
+            <span class="input-label">{{ content.label }}</span>
+            <input type="text" ng-model="submits[content.index]">
+          </label>
+        </div>
         <div class="padding">
           <button class="button button-block button-positive" ng-click="showSignatureModal()">Sign</button>
         </div>
