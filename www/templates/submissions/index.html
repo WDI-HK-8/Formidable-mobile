@@ -1,7 +1,7 @@
 <ion-view view-title="Submissions" hide-back-button="true">
   <ion-content>
     <div class="list card">
-    <a class="item" ng-repeat="form in forms" ui-sref="app.singleForm({ id: form.id })">
+    <a class="item" ng-repeat="form in forms" ui-sref="app.formSubmissions({ id: form.id })">
       {{ form.name }}
     </a>
     </div>

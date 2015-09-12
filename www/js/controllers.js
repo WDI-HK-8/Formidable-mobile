@@ -130,6 +130,28 @@ angular.module('starter.controllers', [])
   }).error(function(resp){
       console.log(resp)
   });
+})
+
+.controller('FormSubmissionsCtrl', function($scope, $stateParams, $http, apiUrl) {
+
+  // Get the form name
+  $http.get(apiUrl + "/forms/" + $stateParams.id).success(function(resp){
+    console.log("Form infos",resp);
+    $scope.form = resp;
+
+  }).error(function(resp){
+    console.log(resp)
+  });
+
+  // Get list of submissions for 1 form
+  $http.get(apiUrl + "/forms/" + $stateParams.id + "/submissions").success(
+    function(resp){
+      console.log("list submissions",resp);
+      $scope.submissions = resp;
+
+  }).error(function(resp){
+      console.log(resp)
+  });
 });
 
 

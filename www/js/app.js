@@ -56,11 +56,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-token-auth'])
   })
 
   .state('app.submissions', {
-    url: '/submissions',
+    url: '/forms-submissions',
     views: {
       'menuContent': {
         templateUrl: 'templates/submissions/index.html',
         controller: 'SubmissionsCtrl'
+      }
+    }
+  })
+
+  .state('app.formSubmissions', {
+    url: '/forms-submissions/:id/',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/submissions/show.html',
+        controller: 'FormSubmissionsCtrl'
       }
     }
   });

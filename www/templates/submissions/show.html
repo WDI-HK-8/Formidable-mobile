@@ -1,0 +1,10 @@
+<ion-view view-title="{{ form.name }}" hide-back-button="false">
+  <ion-content>
+    <div class="list card">
+    <div class="item" ng-repeat="submission in submissions">
+      <h2>Submission {{ submission.id }}</h2>
+      <p>Submitted on {{ submission.created_at | date:"dd/MM/yyyy 'at' h:mma" }}</p>
+    </div>
+    </div>
+  </ion-content>
+</ion-view>
