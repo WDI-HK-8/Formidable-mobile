@@ -15,6 +15,7 @@ angular.module('starter.controllers', [])
     console.log("current user:", $scope.currentUser)
   };
 
+  // Login
   $scope.loginData = {};
 
   $scope.doLogin = function() {
@@ -36,6 +37,7 @@ angular.module('starter.controllers', [])
     });
   };
 
+  // Logout
   $scope.logout = function(){
     $window.localStorage.setItem('current-user', null);
     validateUser();
@@ -47,6 +49,7 @@ angular.module('starter.controllers', [])
   
   var user_id = $scope.currentUser.id;
 
+  // Get list of forms for current user
   $http.get(apiUrl + "/users/" + user_id + "/forms").success(
     function(resp){
       console.log(resp);
@@ -60,6 +63,7 @@ angular.module('starter.controllers', [])
 
   var user_id = $scope.currentUser.id;
 
+  // Get list of fields for 1 form
   $http.get(apiUrl + "/forms/" + $stateParams.id).success(function(resp){
     console.log("Form infos",resp);
     $scope.form = resp;
@@ -69,17 +73,20 @@ angular.module('starter.controllers', [])
     console.log(resp)
   });
 
+  // Submit answers
   $scope.submits = {};
 
   $scope.submitAnswers = function() {
+
+    // Create a submission
     $http.post(apiUrl + "/forms/" + $stateParams.id + "/submissions").success(function(resp){
       console.log("submission create",resp);
       console.log($scope.submits)
       
+      // Add each answer for each field into an object called hash
       var answers = {};
-      
       submissionId = resp.id;
-      
+
       $scope.contents.forEach(function(content) {
         answerValues = [$scope.submits[content.index]];
         answers[content.id] = answerValues;
@@ -88,10 +95,12 @@ angular.module('starter.controllers', [])
 
       var hash = {answers: answers}
       
+      // Submit the hash to submissions
       $http.post(apiUrl + '/submissions/' + submissionId + '/answers', hash).success(function(response) {
         console.log("response", response);
       });
 
+      // Popup success after submitting
       $ionicPopup.alert({
         title: 'Success',
         template: 'Form answers successfully submitted'
@@ -112,28 +121,15 @@ angular.module('starter.controllers', [])
 .controller('SubmissionsCtrl', function($scope, $stateParams, $http, apiUrl) {
   var user_id = $scope.currentUser.id;
 
+  // Get list of forms for current user in submissions
   $http.get(apiUrl + "/users/" + user_id + "/forms").success(
     function(resp){
       console.log("list forms",resp);
-      var forms = resp;
-      
-      forms.forEach(function(form) {
+      $scope.forms = resp;
 
-        $http.get(apiUrl + "/forms/" + form.id + "/submissions").success(
-          function(resp){
-            console.log("list submissions for 1 form",resp);
-            $scope.submissions = resp;
-            $scope.submissions.forEach(function(submission) {
-              submission.name = form.name;
-            });
-        }).error(function(resp){
-            console.log(resp)
-        });
-      });
-
-    }).error(function(resp){
+  }).error(function(resp){
       console.log(resp)
-    });
+  });
 });
 
 
