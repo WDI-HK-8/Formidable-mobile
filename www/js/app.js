@@ -73,6 +73,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-token-auth'])
         controller: 'FormSubmissionsCtrl'
       }
     }
+  })
+
+  .state('app.answersSubmission', {
+    url: '/submissions/:id/answers',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/submissions/answers.html',
+        controller: 'AnswersSubmissionCtrl'
+      }
+    }
   });
 
   $urlRouterProvider.otherwise('/app/login');

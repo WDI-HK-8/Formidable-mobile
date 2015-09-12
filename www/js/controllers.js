@@ -152,6 +152,33 @@ angular.module('starter.controllers', [])
   }).error(function(resp){
       console.log(resp)
   });
+})
+
+.controller('AnswersSubmissionCtrl', function($scope, $stateParams, $http, apiUrl) {
+
+  // Get list of answers for 1 submission
+  $http.get(apiUrl + "/submissions/" + $stateParams.id).success(
+    function(resp){
+      console.log("submission infos",resp);
+      $scope.answers = resp.answers;
+
+      // Get content label for each answer
+      $scope.answers.forEach(function(answer){
+
+        var contentId = answer.content_id;
+        
+        $http.get(apiUrl + "/contents/" + contentId).success(function(resp){
+          console.log(resp);
+          answer.label = resp.label
+        });
+
+        // Transform answers (arrays) into string
+        answer.values = answer.values.join(", ")
+      });
+
+  }).error(function(resp){
+      console.log(resp)
+  });
 });
 
 
