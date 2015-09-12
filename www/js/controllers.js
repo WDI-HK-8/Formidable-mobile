@@ -134,7 +134,6 @@ angular.module('starter.controllers', [])
 
         answerValues = $scope.likeSubmits[content.index];
         answers[content.id] = answerValues;
-        console.log(answers)
       });
       console.log("answers", answers)
 
