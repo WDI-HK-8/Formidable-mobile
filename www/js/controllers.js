@@ -81,7 +81,7 @@ angular.module('starter.controllers', [])
     $scope.contents.forEach(function(content) {
       if (content.options !== null) {
         content.options.forEach(function(option) {
-          var hash = {'name': option}
+          var hash = {'name': option, checked: false}
           options.push(hash);
         });
         content.options = options;
@@ -103,20 +103,36 @@ angular.module('starter.controllers', [])
     // Create a submission
     $http.post(apiUrl + "/forms/" + $stateParams.id + "/submissions", random).success(function(resp){
       console.log("submission create",resp);
-      console.log($scope.submits)
       
       // Add each answer for each field into an object called hash
       var answers = {};
       submissionId = resp.id;
 
       $scope.contents.forEach(function(content) {
-        if($scope.submits[content.index]['name']) {
-          $scope.submits[content.index] = $scope.submits[content.index]['name'];
+        
+        // Get answer from text/textarea fields
+        if(content.category == 'text' || content.category == 'textarea'){
+          $scope.submits[content.index] = [$scope.submits[content.index]];
+        }
+
+        // Get answer from dropdown fields
+        if(content.category == 'dropdown') {
+          $scope.submits[content.index] = [$scope.submits[content.index]['name']];
+        }
+
+        // Get answer from checkbox fields
+        if(content.category == 'checkbox') {
+          $scope.submits[content.index] = []
+          content.options.forEach(function(option) {
+            if(option.checked) {
+              $scope.submits[content.index].push(option.name);
+            }
+          });
         }
         console.log($scope.submits)
-        answerValues = [$scope.submits[content.index]];
+
+        answerValues = $scope.submits[content.index];
         answers[content.id] = answerValues;
-        console.log(answers)
       });
       console.log("answers", answers)
 

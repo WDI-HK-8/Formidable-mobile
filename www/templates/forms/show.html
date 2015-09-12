@@ -22,6 +22,14 @@
             <textarea ng-model="submits[content.index]" type="text" rows="5"></textarea>
           </label>
 
+          <!-- CHECKBOXES -->
+          <div ng-if="content.category == 'checkbox'" class="list">
+            {{ content.label }}
+            <ion-checkbox ng-model="option.checked" ng-checked="option.checked" ng-repeat="option in content.options">
+               {{ option.name }}
+            </ion-checkbox>
+          </div>
+
         </div>
         <div class="padding">
           <button class="button button-block button-positive" ng-click="showSignatureModal()">Sign</button>
