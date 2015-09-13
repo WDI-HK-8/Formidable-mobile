@@ -141,15 +141,16 @@ angular.module('starter.controllers', [])
       // Submit the hash to submissions
       $http.post(apiUrl + '/submissions/' + submissionId + '/answers', hash).success(function(response) {
         console.log("response", response);
+        
+        // Popup success after submitting
+        $ionicPopup.alert({
+          title: 'Success',
+          template: 'Form answers successfully submitted'
+        }).then(function(){
+          $state.go('app.forms');
+        });
       });
 
-      // Popup success after submitting
-      $ionicPopup.alert({
-        title: 'Success',
-        template: 'Form answers successfully submitted'
-      }).then(function(){
-        $state.go('app.forms');
-      });
     }).error(function(resp){
       console.log(resp)
       $ionicPopup.alert({
