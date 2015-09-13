@@ -231,6 +231,8 @@ angular.module('starter.controllers', [])
       $scope.$broadcast('scroll.refreshComplete')
     });
   }
+
+  $scope.doRefresh();
 })
 
 .controller('FormSubmissionsCtrl', function($scope, $stateParams, $http, apiUrl) {

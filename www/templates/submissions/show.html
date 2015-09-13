@@ -1,5 +1,7 @@
 <ion-view view-title="{{ form.name }}" hide-back-button="false">
   <ion-content>
+    <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
+    </ion-refresher>
     <div class="list card">
     <a class="item item-text-wrap item-icon-left" ng-repeat="submission in submissions" ui-sref="app.answersSubmission({ id: submission.id })">
       <i class="icon icon-card ion-ios-paperplane"></i>
