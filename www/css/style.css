@@ -117,6 +117,10 @@ font-family: 'Lato', Helvetica, Arial, sans-serif;
   font-size: 18px;
 }
 
+input, textarea {
+  width: 100%;
+}
+
 .login-input.item-input input, .login-input.item-input textarea {
   color: white;
 }
