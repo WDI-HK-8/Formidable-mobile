@@ -56,14 +56,19 @@ angular.module('starter.controllers', [])
   
   var user_id = $scope.currentUser.id;
 
-  // Get list of forms for current user
-  $http.get(apiUrl + "/users/" + user_id + "/forms").success(
-    function(resp){
-      console.log(resp);
-      $scope.forms = resp;
+  $scope.doRefresh = function(){
+    // Get list of forms for current user
+    $http.get(apiUrl + "/users/" + user_id + "/forms").success(function(resp){
+        console.log(resp);
+        $scope.forms = resp;
     }).error(function(resp){
       console.log(resp)
+    }).finally(function() {
+      $scope.$broadcast('scroll.refreshComplete')
     });
+  }
+
+  $scope.doRefresh();
 })
 
 .controller('ShowFormCtrl', function($scope, $stateParams, $http, apiUrl, $ionicPopup, $state, $ionicModal) {
