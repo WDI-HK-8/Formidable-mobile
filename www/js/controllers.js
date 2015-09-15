@@ -96,6 +96,7 @@ angular.module('starter.controllers', [])
 
   // Submit answers
   $scope.submits = {};
+  $scope.likeSubmits = {};
   $scope.signature = '';
 
   $scope.submitAnswers = function() {
@@ -112,26 +113,26 @@ angular.module('starter.controllers', [])
         
         // Get answer from text/textarea fields
         if(content.category == 'text' || content.category == 'textarea'){
-          $scope.submits[content.index] = [$scope.submits[content.index]];
+          $scope.likeSubmits[content.index] = [$scope.submits[content.index]];
         }
 
         // Get answer from dropdown fields
         if(content.category == 'dropdown') {
-          $scope.submits[content.index] = [$scope.submits[content.index]['name']];
+          $scope.likeSubmits[content.index] = [$scope.submits[content.index]['name']];
         }
 
         // Get answer from checkbox fields
         if(content.category == 'checkbox') {
-          $scope.submits[content.index] = []
+          $scope.likeSubmits[content.index] = []
           content.options.forEach(function(option) {
             if(option.checked) {
-              $scope.submits[content.index].push(option.name);
+              $scope.likeSubmits[content.index].push(option.name);
             }
           });
         }
-        console.log($scope.submits)
+        console.log($scope.likeSubmits)
 
-        answerValues = $scope.submits[content.index];
+        answerValues = $scope.likeSubmits[content.index];
         answers[content.id] = answerValues;
       });
       console.log("answers", answers)
