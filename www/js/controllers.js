@@ -123,7 +123,9 @@ angular.module('starter.controllers', [])
 
         // Get answer from dropdown fields or radio fields
         if(content.category == 'dropdown') {
-          $scope.likeSubmits[content.index] = [$scope.submits[content.index]['name']];
+          if($scope.submits[content.index]) {
+            $scope.likeSubmits[content.index] = [$scope.submits[content.index]['name']];
+          }
         }
 
         // Get answer from checkbox fields
