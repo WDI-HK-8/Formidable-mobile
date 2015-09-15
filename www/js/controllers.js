@@ -14,7 +14,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('LogInCtrl', function($scope, $auth, $window, $ionicPopup, $state) {
+.controller('LogInCtrl', function($scope, $auth, $window, $ionicPopup, $state, $http, apiUrl) {
 
   var validateUser = function(){
     $scope.currentUser = JSON.parse($window.localStorage.getItem('current-user'));
@@ -22,26 +22,20 @@ angular.module('starter.controllers', [])
   };
 
   // Login
-  $scope.loginData = {};
+  $scope.company = {};
 
   $scope.doLogin = function() {
-
-    $auth.submitLogin($scope.loginData).then(function(resp){
-      console.log(resp);
-
-      $window.localStorage.setItem('current-user', JSON.stringify(resp));
+    $http.get(apiUrl + '/companies/' + $scope.company.code).success(function(response) {
+      $window.localStorage.setItem('current-user', JSON.stringify(response.user[0]));
       validateUser();
-
       $state.go('app.forms');
-      $scope.loginData = {};
-
-    }).catch(function(resp){
-      console.log(resp);
+      $scope.company = {};
+    }).catch(function(response) {
       $ionicPopup.alert({
         title: 'Could not login',
         template: 'Please try again'
       });
-    });
+    })
   };
 
   // Logout
@@ -53,7 +47,11 @@ angular.module('starter.controllers', [])
 })
 
 .controller('FormsCtrl', function($scope, $auth, $window, $http, apiUrl) {
-  
+  var validateUser = function(){
+    $scope.currentUser = JSON.parse($window.localStorage.getItem('current-user'));
+    console.log("current user:", $scope.currentUser)
+  };
+  validateUser();
   var user_id = $scope.currentUser.id;
 
   // Get list of forms for current user
