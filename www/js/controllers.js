@@ -56,7 +56,7 @@ angular.module('starter.controllers', [])
   
   var user_id = $scope.currentUser.id;
 
-  $scope.doRefresh = function(){
+  $scope.getForms = function(){
     // Get list of forms for current user
     $http.get(apiUrl + "/users/" + user_id + "/forms").success(function(resp){
         console.log(resp);
@@ -68,7 +68,7 @@ angular.module('starter.controllers', [])
     });
   }
 
-  $scope.doRefresh();
+  $scope.getForms();
 })
 
 .controller('ShowFormCtrl', function($scope, $stateParams, $http, apiUrl, $ionicPopup, $state, $ionicModal) {
@@ -220,7 +220,7 @@ angular.module('starter.controllers', [])
 .controller('SubmissionsCtrl', function($scope, $stateParams, $http, apiUrl) {
   var user_id = $scope.currentUser.id;
 
-  $scope.doRefresh = function(){
+  $scope.getForms = function(){
     // Get list of forms for current user
     $http.get(apiUrl + "/users/" + user_id + "/forms").success(function(resp){
         console.log(resp);
@@ -232,7 +232,7 @@ angular.module('starter.controllers', [])
     });
   }
 
-  $scope.doRefresh();
+  $scope.getForms();
 })
 
 .controller('FormSubmissionsCtrl', function($scope, $stateParams, $http, apiUrl) {
@@ -246,7 +246,7 @@ angular.module('starter.controllers', [])
     console.log(resp)
   });
 
-  $scope.doRefresh = function(){
+  $scope.getSubmissions = function(){
     // Get list of submissions for 1 form
     $http.get(apiUrl + "/forms/" + $stateParams.id + "/submissions").success(
       function(resp){
@@ -260,7 +260,7 @@ angular.module('starter.controllers', [])
     });
   }
 
-  $scope.doRefresh();
+  $scope.getSubmissions();
 })
 
 .controller('AnswersSubmissionCtrl', function($scope, $stateParams, $http, apiUrl) {
