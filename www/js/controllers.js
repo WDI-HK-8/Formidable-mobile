@@ -75,6 +75,7 @@ angular.module('starter.controllers', [])
 
   // Submit answers
   $scope.submits = {};
+  $scope.signature = '';
 
   $scope.submitAnswers = function() {
     var random = {submission: {signature: $scope.signature}};
