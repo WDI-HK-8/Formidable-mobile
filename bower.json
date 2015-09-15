@@ -5,6 +5,7 @@
     "ionic": "driftyco/ionic-bower#1.1.0"
   },
   "dependencies": {
-    "ng-token-auth": "~0.0.28"
+    "ng-token-auth": "~0.0.28",
+    "signature_pad": "~1.5.0"
   }
 }

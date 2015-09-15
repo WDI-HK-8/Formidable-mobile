@@ -66,7 +66,7 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('ShowFormCtrl', function($scope, $stateParams, $http, apiUrl, $ionicPopup, $state) {
+.controller('ShowFormCtrl', function($scope, $stateParams, $http, apiUrl, $ionicPopup, $state, $ionicModal) {
 
   var user_id = $scope.currentUser.id;
 
@@ -82,11 +82,12 @@ angular.module('starter.controllers', [])
 
   // Submit answers
   $scope.submits = {};
+  $scope.signature = '';
 
   $scope.submitAnswers = function() {
-
+    var random = {submission: {signature: $scope.signature}};
     // Create a submission
-    $http.post(apiUrl + "/forms/" + $stateParams.id + "/submissions").success(function(resp){
+    $http.post(apiUrl + "/forms/" + $stateParams.id + "/submissions", random).success(function(resp){
       console.log("submission create",resp);
       console.log($scope.submits)
       
@@ -121,6 +122,55 @@ angular.module('starter.controllers', [])
         template: 'Error while submitting. Please try again.'
       });
     });
+  };
+
+  var signaturePad;
+  var canvas;
+ 
+  $scope.clearCanvas = function() {
+      signaturePad.clear();
+  };
+ 
+  $scope.saveCanvas = function() {
+      if(signaturePad.isEmpty()) {
+        $ionicPopup.alert({
+          title: 'Error',
+          template: 'Please sign the page'
+        });
+      } else {
+        $scope.signature = signaturePad.toDataURL();
+        $scope.closeSignatureModal();
+        $scope.submitAnswers();
+      }
+  };
+ 
+  $scope.resizeCanvas = function() {
+    var ratio = 1.0;
+    canvas.width = canvas.offsetWidth * ratio;
+    canvas.height = canvas.offsetHeight * ratio;
+    canvas.getContext('2d').scale(ratio, ratio);
+  };
+ 
+  $scope.showSignatureModal = function() {
+    $ionicModal.fromTemplateUrl("templates/signature.html", {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.signatureModal = modal;
+      $scope.signatureModal.show();
+      canvas = angular.element($scope.signatureModal.modalEl).find('canvas')[0];
+      $scope.resizeCanvas();
+      signaturePad = new SignaturePad(canvas, {
+        minWidth: 1,
+        maxWidth: 1.5
+      });
+    });
+  };
+ 
+  $scope.closeSignatureModal = function() {
+    $scope.signatureModal.hide();
+    $scope.signatureModal.remove();
+    signaturePad = canvas = $scope.signatureModal = null;
   };
 
 })
@@ -168,7 +218,7 @@ angular.module('starter.controllers', [])
     function(resp){
       console.log("submission infos",resp);
       $scope.answers = resp.answers;
-
+      $scope.signature = resp.signature;
       // Get content label for each answer
       $scope.answers.forEach(function(answer){
 
