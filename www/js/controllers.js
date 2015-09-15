@@ -71,10 +71,24 @@ angular.module('starter.controllers', [])
   var user_id = $scope.currentUser.id;
 
   // Get list of fields for 1 form
+  var options = [];
+
   $http.get(apiUrl + "/forms/" + $stateParams.id).success(function(resp){
     console.log("Form infos",resp);
     $scope.form = resp;
     $scope.contents = resp.contents;
+
+    $scope.contents.forEach(function(content) {
+      if (content.options !== null) {
+        content.options.forEach(function(option) {
+          var hash = {'name': option, checked: false}
+          options.push(hash);
+        });
+        content.options = options;
+        options = [];
+        console.log('refined options ',content.options,options);
+      }
+    });
 
   }).error(function(resp){
     console.log(resp)
@@ -82,6 +96,7 @@ angular.module('starter.controllers', [])
 
   // Submit answers
   $scope.submits = {};
+  $scope.likeSubmits = {};
   $scope.signature = '';
 
   $scope.submitAnswers = function() {
@@ -89,14 +104,35 @@ angular.module('starter.controllers', [])
     // Create a submission
     $http.post(apiUrl + "/forms/" + $stateParams.id + "/submissions", random).success(function(resp){
       console.log("submission create",resp);
-      console.log($scope.submits)
       
       // Add each answer for each field into an object called hash
       var answers = {};
       submissionId = resp.id;
 
       $scope.contents.forEach(function(content) {
-        answerValues = [$scope.submits[content.index]];
+        
+        // Get answer from text/textarea fields
+        if(content.category == 'text' || content.category == 'textarea'){
+          $scope.likeSubmits[content.index] = [$scope.submits[content.index]];
+        }
+
+        // Get answer from dropdown fields
+        if(content.category == 'dropdown') {
+          $scope.likeSubmits[content.index] = [$scope.submits[content.index]['name']];
+        }
+
+        // Get answer from checkbox fields
+        if(content.category == 'checkbox') {
+          $scope.likeSubmits[content.index] = []
+          content.options.forEach(function(option) {
+            if(option.checked) {
+              $scope.likeSubmits[content.index].push(option.name);
+            }
+          });
+        }
+        console.log($scope.likeSubmits)
+
+        answerValues = $scope.likeSubmits[content.index];
         answers[content.id] = answerValues;
       });
       console.log("answers", answers)
@@ -106,15 +142,16 @@ angular.module('starter.controllers', [])
       // Submit the hash to submissions
       $http.post(apiUrl + '/submissions/' + submissionId + '/answers', hash).success(function(response) {
         console.log("response", response);
+        
+        // Popup success after submitting
+        $ionicPopup.alert({
+          title: 'Success',
+          template: 'Form answers successfully submitted'
+        }).then(function(){
+          $state.go('app.forms');
+        });
       });
 
-      // Popup success after submitting
-      $ionicPopup.alert({
-        title: 'Success',
-        template: 'Form answers successfully submitted'
-      }).then(function(){
-        $state.go('app.forms');
-      });
     }).error(function(resp){
       console.log(resp)
       $ionicPopup.alert({

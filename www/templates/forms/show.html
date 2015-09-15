@@ -1,18 +1,43 @@
 <ion-view view-title="{{ form.name }}">
   <ion-content>
     <form>
-      <div class="list">
-        <label class="item" ng-repeat="content in contents | orderBy: 'index'">
-          <span class="input-label">{{ content.label }}</span>
-          <input ng-if="content.category == 'text'" type="text" ng-model="submits[content.index]">
-        </label>
+      <div class="list card">
+        <div ng-repeat="content in contents | orderBy: 'index'" class="item">
+
+        <!-- INPUT TEXTS -->
+          <label ng-if="content.category == 'text'" class="item">
+            <span class="input-label">{{ content.label }}</span>
+            <input ng-model="submits[content.index]" type="text">
+          </label>
+          
+          <!-- DROPDOWNS -->
+          <label ng-if="content.category == 'dropdown'"class="item item-select">
+            <div class="input-label"> {{ content.label }} </div>
+            <select ng-model="submits[content.index]" ng-options="option.name for option in content.options"></select>
+          </label>
+
+          <!-- INPUT TEXTAREAS -->
+          <label ng-if="content.category == 'textarea'" class="item">
+            <span class="input-label">{{ content.label }}</span>
+            <textarea ng-model="submits[content.index]" type="text" rows="5"></textarea>
+          </label>
+
+          <!-- CHECKBOXES -->
+          <div ng-if="content.category == 'checkbox'" class="list">
+            {{ content.label }}
+            <ion-checkbox ng-model="option.checked" ng-checked="option.checked" ng-repeat="option in content.options">
+               {{ option.name }}
+            </ion-checkbox>
+          </div>
+
+        </div>
         <div class="padding">
           <button class="button button-block button-positive" ng-click="showSignatureModal()">Sign</button>
         </div>
       </div>
     </form>
     <div class="col" ng-show="signature">
-+      <img ng-src="{{signature}}" style="width:100%;" />
-+   </div>
+      <img ng-src="{{signature}}" style="width:100%;" />
+   </div>
   </ion-content>
 </ion-view>
