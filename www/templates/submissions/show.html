@@ -3,7 +3,7 @@
     <ion-refresher pulling-text="Pull to refresh" on-refresh="getSubmissions()">
     </ion-refresher>
     <div class="list card">
-    <a class="item item-text-wrap item-icon-left" ng-repeat="submission in submissions" ui-sref="app.answersSubmission({ id: submission.id })">
+    <a class="item item-text-wrap item-icon-left" ng-repeat="submission in submissions | orderBy:'-'" ui-sref="app.answersSubmission({ id: submission.id })">
       <i class="icon icon-card ion-ios-paperplane"></i>
       <h2>Submission {{ submission.id }}</h2>
       <p class="subtitle-list">Submitted on {{ submission.created_at | date:"dd/MM/yyyy 'at' h:mma" }}</p>
