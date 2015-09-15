@@ -30,6 +30,22 @@
             </ion-checkbox>
           </div>
 
+          <!-- DESCRIPTION -->
+          <div ng-if="content.category == 'description'" class="list">
+            {{ content.label }}
+            <p ng-repeat="option in content.options">
+               {{ option.name }}
+            </p>
+          </div>
+
+          <!-- RADIO -->
+          <div ng-if="content.category == 'radio'" class="list">
+            {{ content.label }}
+            <ion-radio ng-model="option.checked" ng-value="option.name" ng-repeat="option in content.options">
+               {{ option.name }}
+            </ion-radio>
+          </div>
+
         </div>
         <div class="padding">
           <button class="button button-block button-positive" ng-click="showSignatureModal()" ng-if="form.signature_required">Sign</button>
