@@ -125,9 +125,16 @@ angular.module('starter.controllers', [])
   };
  
   $scope.saveCanvas = function() {
-      $scope.signature = signaturePad.toDataURL();
-      $scope.closeSignatureModal();
-      $scope.submitAnswers();
+      if(signaturePad.isEmpty()) {
+        $ionicPopup.alert({
+          title: 'Error',
+          template: 'Please sign the page'
+        });
+      } else {
+        $scope.signature = signaturePad.toDataURL();
+        $scope.closeSignatureModal();
+        $scope.submitAnswers();
+      }
   };
  
   $scope.resizeCanvas = function() {
