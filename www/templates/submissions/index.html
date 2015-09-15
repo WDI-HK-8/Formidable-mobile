@@ -1,8 +1,9 @@
 <ion-view view-title="Submissions" hide-back-button="true">
   <ion-content>
     <div class="list card">
-    <a class="item" ng-repeat="form in forms" ui-sref="app.formSubmissions({ id: form.id })">
-      {{ form.name }}
+    <a class="item item-text-wrap item-icon-left" ng-repeat="form in forms" ui-sref="app.formSubmissions({ id: form.id })">
+      <i class="icon icon-card ion-ios-list"></i>
+      <h2>{{ form.name }}</h2>
     </a>
     </div>
   </ion-content>

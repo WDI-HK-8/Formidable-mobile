@@ -1,22 +1,18 @@
 <ion-view view-title="Log In" hide-nav-bar="true">
-  <ion-content>
+  <ion-content class="login-main">
+    <div class="logo-login text-center">
+      <img id="logo-login" src="img/logo_white.png">
+    </div>
     <form ng-submit="doLogin()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Email</span>
-          <input type="email" ng-model="loginData.email">
+      <div class="list list-login">
+        <label class="item item-input login-input">
+          <input class="login-holder" type="email" ng-model="loginData.email" placeholder="Email">
         </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
+        <label class="item item-input login-input">
+          <input class="login-holder" type="password" ng-model="loginData.password" placeholder="Password">
         </label>
-        <div class="padding">
-          <button class="button button-block button-positive" type="submit">Log in</button>
-        </div>
+        <button class="button button-block button-balanced" type="submit">Log in</button>
       </div>
     </form>
-    <div class="padding">
-      <button class="button button-block button-balanced" ng-click="logout()">Log out</button>
-    </div>
   </ion-content>
 </ion-view>
