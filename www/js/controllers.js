@@ -56,14 +56,19 @@ angular.module('starter.controllers', [])
   
   var user_id = $scope.currentUser.id;
 
-  // Get list of forms for current user
-  $http.get(apiUrl + "/users/" + user_id + "/forms").success(
-    function(resp){
-      console.log(resp);
-      $scope.forms = resp;
+  $scope.getForms = function(){
+    // Get list of forms for current user
+    $http.get(apiUrl + "/users/" + user_id + "/forms").success(function(resp){
+        console.log(resp);
+        $scope.forms = resp;
     }).error(function(resp){
       console.log(resp)
+    }).finally(function() {
+      $scope.$broadcast('scroll.refreshComplete')
     });
+  }
+
+  $scope.getForms();
 })
 
 .controller('ShowFormCtrl', function($scope, $stateParams, $http, apiUrl, $ionicPopup, $state, $ionicModal) {
@@ -97,7 +102,7 @@ angular.module('starter.controllers', [])
   // Submit answers
   $scope.submits = {};
   $scope.likeSubmits = {};
-  $scope.signature = '';
+  $scope.signature = null;
 
   $scope.submitAnswers = function() {
     var random = {submission: {signature: $scope.signature}};
@@ -215,15 +220,19 @@ angular.module('starter.controllers', [])
 .controller('SubmissionsCtrl', function($scope, $stateParams, $http, apiUrl) {
   var user_id = $scope.currentUser.id;
 
-  // Get list of forms for current user in submissions
-  $http.get(apiUrl + "/users/" + user_id + "/forms").success(
-    function(resp){
-      console.log("list forms",resp);
-      $scope.forms = resp;
-
-  }).error(function(resp){
+  $scope.getForms = function(){
+    // Get list of forms for current user
+    $http.get(apiUrl + "/users/" + user_id + "/forms").success(function(resp){
+        console.log(resp);
+        $scope.forms = resp;
+    }).error(function(resp){
       console.log(resp)
-  });
+    }).finally(function() {
+      $scope.$broadcast('scroll.refreshComplete')
+    });
+  }
+
+  $scope.getForms();
 })
 
 .controller('FormSubmissionsCtrl', function($scope, $stateParams, $http, apiUrl) {
@@ -237,15 +246,21 @@ angular.module('starter.controllers', [])
     console.log(resp)
   });
 
-  // Get list of submissions for 1 form
-  $http.get(apiUrl + "/forms/" + $stateParams.id + "/submissions").success(
-    function(resp){
-      console.log("list submissions",resp);
-      $scope.submissions = resp;
+  $scope.getSubmissions = function(){
+    // Get list of submissions for 1 form
+    $http.get(apiUrl + "/forms/" + $stateParams.id + "/submissions").success(
+      function(resp){
+        console.log("list submissions",resp);
+        $scope.submissions = resp;
 
-  }).error(function(resp){
-      console.log(resp)
-  });
+    }).error(function(resp){
+        console.log(resp)
+    }).finally(function() {
+      $scope.$broadcast('scroll.refreshComplete')
+    });
+  }
+
+  $scope.getSubmissions();
 })
 
 .controller('AnswersSubmissionCtrl', function($scope, $stateParams, $http, apiUrl) {

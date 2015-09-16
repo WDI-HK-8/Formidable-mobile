@@ -19,7 +19,7 @@
           <!-- INPUT TEXTAREAS -->
           <label ng-if="content.category == 'textarea'" class="item">
             <span class="input-label">{{ content.label }}</span>
-            <textarea ng-model="submits[content.index]" type="text" rows="5"></textarea>
+            <textarea ng-model="submits[content.index]" type="text"></textarea>
           </label>
 
           <!-- CHECKBOXES -->
@@ -32,12 +32,10 @@
 
         </div>
         <div class="padding">
-          <button class="button button-block button-positive" ng-click="showSignatureModal()">Sign</button>
+          <button class="button button-block button-positive" ng-click="showSignatureModal()" ng-if="form.signature_required">Sign</button>
+          <button class="button button-block button-positive" ng-click="submitAnswers()" ng-if="!form.signature_required">Submit</button>
         </div>
       </div>
     </form>
-    <div class="col" ng-show="signature">
-      <img ng-src="{{signature}}" style="width:100%;" />
-   </div>
   </ion-content>
 </ion-view>

@@ -10,7 +10,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-token-auth'])
     }
     if (window.StatusBar) {
 
-      StatusBar.styleDefault();
+      StatusBar.style(1);
     }
   });
 })
