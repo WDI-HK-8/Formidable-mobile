@@ -53,6 +53,11 @@ angular.module('starter.controllers', [])
 })
 
 .controller('FormsCtrl', function($scope, $auth, $window, $http, apiUrl) {
+  var validateUser = function(){
+    $scope.currentUser = JSON.parse($window.localStorage.getItem('current-user'));
+    console.log("current user:", $scope.currentUser)
+  };
+  validateUser();
   
   var user_id = $scope.currentUser.id;
 
