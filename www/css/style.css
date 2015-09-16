@@ -148,6 +148,8 @@ input, textarea {
   height: 70%;
 }
 
-
+.scroll-content {
+  overflow: visible;
+}
 
 
