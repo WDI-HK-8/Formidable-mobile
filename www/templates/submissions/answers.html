@@ -5,7 +5,7 @@
           <h2>{{ answer.label }}</h2>
           <p>{{ answer.values }}</p>
         </div>
-        <div class="item">
+        <div class="item" ng-if="signature">
           <label>Signature</label>
           <img style="width: 80%; float: right;" src="{{ signature }}">
         </div>

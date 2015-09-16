@@ -32,12 +32,10 @@
 
         </div>
         <div class="padding">
-          <button class="button button-block button-positive" ng-click="showSignatureModal()">Sign</button>
+          <button class="button button-block button-positive" ng-click="showSignatureModal()" ng-if="form.signature_required">Sign</button>
+          <button class="button button-block button-positive" ng-click="submitAnswers()" ng-if="!form.signature_required">Submit</button>
         </div>
       </div>
     </form>
-    <div class="col" ng-show="signature">
-      <img ng-src="{{signature}}" style="width:100%;" />
-   </div>
   </ion-content>
 </ion-view>

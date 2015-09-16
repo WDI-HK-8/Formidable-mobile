@@ -102,7 +102,7 @@ angular.module('starter.controllers', [])
   // Submit answers
   $scope.submits = {};
   $scope.likeSubmits = {};
-  $scope.signature = '';
+  $scope.signature = null;
 
   $scope.submitAnswers = function() {
     var random = {submission: {signature: $scope.signature}};
