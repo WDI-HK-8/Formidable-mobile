@@ -133,6 +133,21 @@ input, textarea {
   font-size: 10px;
 }
 
+.sign-content .button.button-positive {
+  margin-top: 30px;
+}
+
+.sign-content .button.button-stable {
+  margin-top: 30px;
+}
+
+#signatureCanvas {
+  margin-top: 10px;
+  width: 100%;
+  border: 1px solid black;
+  height: 70%;
+}
+
 
 
 

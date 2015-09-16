@@ -1,13 +1,13 @@
 <ion-modal-view>
-  <ion-header-bar class="bar-positive">
+  <ion-header-bar class="bar bar-header bar-positive">
     <h1 class="title">Capture Signature</h1>
-    <button class="button button-icon icon ion-close-round" ng-click="closeSignatureModal()"></button>
+    <button class="button button-clear" ng-click="closeSignatureModal()">Close</button>
   </ion-header-bar>
-  <ion-content scroll="false" padding="true">
-    <div class="" style="height: 100%;">
-      <canvas id='signatureCanvas' class="padding-horizontal" style="width: 100%;border: 1px solid black; height: 80%;"></canvas>
-      <div class='button-bar padding'>
-        <a class='button button' ng-click='clearCanvas()'>Clear</a>
+  <ion-content scroll="false" padding="true" class="sign-content">
+    <div style="height: 100%;">
+      <canvas id='signatureCanvas' class="padding-horizontal"></canvas>
+      <div>
+        <a class='button button-stable' ng-click='clearCanvas()'>Clear</a>
         <a class='button button-positive' ng-click='saveCanvas()'>Save</a>
       </div>
     </div>
