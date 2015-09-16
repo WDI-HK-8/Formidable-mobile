@@ -121,13 +121,15 @@ angular.module('starter.controllers', [])
           $scope.likeSubmits[content.index] = [$scope.submits[content.index]];
         }
 
-        // Get answer from dropdown fields
+        // Get answer from dropdown fields or radio fields
         if(content.category == 'dropdown') {
-          $scope.likeSubmits[content.index] = [$scope.submits[content.index]['name']];
+          if($scope.submits[content.index]) {
+            $scope.likeSubmits[content.index] = [$scope.submits[content.index]['name']];
+          }
         }
 
         // Get answer from checkbox fields
-        if(content.category == 'checkbox') {
+        if(content.category == 'checkbox' || content.category == 'radio') {
           $scope.likeSubmits[content.index] = []
           content.options.forEach(function(option) {
             if(option.checked) {
@@ -137,8 +139,10 @@ angular.module('starter.controllers', [])
         }
         console.log($scope.likeSubmits)
 
-        answerValues = $scope.likeSubmits[content.index];
-        answers[content.id] = answerValues;
+        if(content.category != 'description') {
+          answerValues = $scope.likeSubmits[content.index];
+          answers[content.id] = answerValues;
+        }
       });
       console.log("answers", answers)
 

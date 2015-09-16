@@ -1,7 +1,7 @@
 <ion-view view-title="Submission {{ submission.id }}">
   <ion-content>
       <div class="list card">
-        <div class="item" ng-repeat="answer in answers | orderBy:'-'">
+        <div class="item" ng-repeat="answer in answers">
           <h2>{{ answer.label }}</h2>
           <p>{{ answer.values }}</p>
         </div>
